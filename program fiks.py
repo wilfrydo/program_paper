@@ -237,6 +237,23 @@ print(f"F1-Score     : {f1_score(y_test, nb_pred_thresh, zero_division=0):.4f}")
 
 # In[ ]:
 
+from sklearn.metrics import confusion_matrix
 
+def show_confusion_matrix(y_true, y_pred, title):
+    cm = confusion_matrix(y_true, y_pred)
+    print(f"\nConfusion Matrix ({title}):")
+    print(cm)
+    plt.figure(figsize=(4,3))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False)
+    plt.title(f'Confusion Matrix - {title}')
+    plt.xlabel('Predicted label')
+    plt.ylabel('True label')
+    plt.show()
+
+# Tampilkan confusion matrix untuk Random Forest
+show_confusion_matrix(y_test, rf_pred, "Random Forest")
+
+# Tampilkan confusion matrix untuk Naive Bayes
+show_confusion_matrix(y_test, nb_pred, "Naive Bayes")
 
 
